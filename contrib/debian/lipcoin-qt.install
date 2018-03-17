@@ -1,0 +1,6 @@
+usr/local/bin/lipcoin-qt usr/bin
+share/pixmaps/lipcoin32.xpm usr/share/pixmaps
+share/pixmaps/lipcoin16.xpm usr/share/pixmaps
+share/pixmaps/lipcoin128.png usr/share/pixmaps
+debian/lipcoin-qt.desktop usr/share/applications
+debian/lipcoin-qt.protocol usr/share/kde4/services/

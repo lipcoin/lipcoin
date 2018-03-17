@@ -1,0 +1,8 @@
+/usr/bin/lipcoin-cli		--	gen_context(system_u:object_r:lipcoin_exec_t,s0)
+/usr/sbin/lipcoind		--	gen_context(system_u:object_r:lipcoin_exec_t,s0)
+/usr/lib(64)?/lipcoin/lipcoind		--	gen_context(system_u:object_r:lipcoin_exec_t,s0)
+
+/etc/lipcoin(/.*)?		gen_context(system_u:object_r:lipcoin_conf_t,s0)
+/var/lib/lipcoin(/.*)?		gen_context(system_u:object_r:lipcoin_var_lib_t,s0)
+
+(/var)?/run/lipcoind(/.*)?   gen_context(system_u:object_r:lipcoin_var_run_t,s0)

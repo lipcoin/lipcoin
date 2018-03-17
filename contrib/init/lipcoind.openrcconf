@@ -1,0 +1,33 @@
+# /etc/conf.d/lipcoind: config file for /etc/init.d/lipcoind
+
+# Config file location
+#LIPCOIND_CONFIGFILE="/etc/lipcoin/lipcoin.conf"
+
+# What directory to write pidfile to?  (created and owned by $LIPCOIND_USER)
+#LIPCOIND_PIDDIR="/var/run/lipcoind"
+
+# What filename to give the pidfile
+#LIPCOIND_PIDFILE="${LIPCOIND_PIDDIR}/lipcoind.pid"
+
+# Where to write lipcoind data (be mindful that the blockchain is large)
+#LIPCOIND_DATADIR="/var/lib/lipcoind"
+
+# User and group to own lipcoind process
+#LIPCOIND_USER="lipcoin"
+#LIPCOIND_GROUP="lipcoin"
+
+# Path to lipcoind executable
+#LIPCOIND_BIN="/usr/bin/lipcoind"
+
+# Nice value to run lipcoind under
+#LIPCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+LIPCOIND_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for lipcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+LIPCOIND_SIGTERM_TIMEOUT=60

@@ -1,0 +1,22 @@
+[Unit]
+Description=LipCoin's distributed currency daemon
+After=network.target
+
+[Service]
+User=lipcoin
+Group=lipcoin
+
+Type=forking
+PIDFile=/var/lib/lipcoind/lipcoind.pid
+ExecStart=/usr/bin/lipcoind -daemon -pid=/var/lib/lipcoind/lipcoind.pid \
+-conf=/etc/lipcoin/lipcoin.conf -datadir=/var/lib/lipcoind -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

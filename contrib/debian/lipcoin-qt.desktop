@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=LipCoin Core
+Comment=Connect to the LipCoin P2P Network
+Comment[de]=Verbinde mit dem LipCoin peer-to-peer Netzwerk
+Comment[fr]=LipCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=LipCoin, eşten eşe kriptografik sanal para birimi
+Exec=lipcoin-qt %u
+Terminal=false
+Type=Application
+Icon=lipcoin128
+MimeType=x-scheme-handler/lipcoin;
+Categories=Office;Finance;

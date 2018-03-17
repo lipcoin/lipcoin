@@ -1,0 +1,81 @@
+policy_module(lipcoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type lipcoin_t;
+type lipcoin_exec_t;
+init_daemon_domain(lipcoin_t, lipcoin_exec_t)
+
+permissive lipcoin_t;
+
+type lipcoin_initrc_exec_t;
+init_script_file(lipcoin_initrc_exec_t)
+
+type lipcoin_conf_t;
+files_type(lipcoin_conf_t)
+
+type lipcoin_var_lib_t;
+files_type(lipcoin_var_lib_t)
+
+type lipcoin_var_run_t;
+files_type(lipcoin_var_run_t)
+
+type lipcoin_port_t;
+corenet_port(lipcoin_port_t)
+
+########################################
+#
+# lipcoin local policy
+#
+allow lipcoin_t self:process { fork };
+
+allow lipcoin_t self:fifo_file rw_fifo_file_perms;
+allow lipcoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(lipcoin_t, lipcoin_conf_t, lipcoin_conf_t)
+manage_files_pattern(lipcoin_t, lipcoin_conf_t, lipcoin_conf_t)
+
+manage_dirs_pattern(lipcoin_t, lipcoin_var_lib_t, lipcoin_var_lib_t)
+manage_files_pattern(lipcoin_t, lipcoin_var_lib_t, lipcoin_var_lib_t)
+files_var_lib_filetrans(lipcoin_t, lipcoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(lipcoin_t, lipcoin_var_run_t, lipcoin_var_run_t)
+manage_files_pattern(lipcoin_t, lipcoin_var_run_t, lipcoin_var_run_t)
+
+sysnet_dns_name_resolve(lipcoin_t)
+corenet_all_recvfrom_unlabeled(lipcoin_t)
+
+allow lipcoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(lipcoin_t)
+corenet_tcp_sendrecv_generic_node(lipcoin_t)
+corenet_tcp_sendrecv_all_ports(lipcoin_t)
+corenet_tcp_bind_generic_node(lipcoin_t)
+
+gen_require(`
+    type lipcoin_port_t;
+')
+allow lipcoin_t lipcoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type lipcoin_port_t;
+')
+allow lipcoin_t lipcoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(lipcoin_t)
+
+files_read_etc_files(lipcoin_t)
+
+miscfiles_read_localization(lipcoin_t)
+
+sysnet_dns_name_resolve(lipcoin_t)
+
+allow lipcoin_t lipcoin_exec_t:file execute_no_trans;
+allow lipcoin_t self:process setsched;
+corecmd_exec_ls(lipcoin_t)
+corenet_tcp_connect_http_port(lipcoin_t)
+dev_read_urand(lipcoin_t)
+fs_getattr_xattr_fs(lipcoin_t)
+kernel_read_system_state(lipcoin_t)
